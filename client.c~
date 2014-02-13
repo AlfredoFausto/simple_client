@@ -50,9 +50,9 @@ return 1;
 
 printf("Ya me conecte!!!!\n");
 
-cadena = (char *) calloc(1,20);
+cadena = (char *) calloc(1,10);
 
-status = write(server,"Dame la fecha\n",20);
+status = write(server,"Hola\n",5);
 status = read(server,cadena,20);
 printf("Nos regreso %s\n",cadena);
 status = write(server,"Adios\r\n",7);

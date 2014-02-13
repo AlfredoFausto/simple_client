@@ -19,9 +19,6 @@ socklen_t clienteLen;
 int status;
 
 char *cadena;
-time_t tiempo = time(0);
-struct tm *tlocal = localtime(&tiempo);
-char output[128];
 
     //Validamos los Arguemntos
 if(args < 2) {
@@ -79,16 +76,15 @@ return 1;
 }
 
 //Inicia el protocolo...
-cadena = (char *) calloc(1,20);
+cadena = (char *) calloc(1,10);
 while(strcmp(cadena,"Adios\r\n")!=0) {
-bzero(cadena,20);
-status=read(client,cadena,20);
+bzero(cadena,10);
+status=read(client,cadena,10);
 printf("Nos envio %s\n\n",cadena);
-strftime(output,128,"%d/%m/%y %H:%M:%S",tlocal);
 
-status=write(client,output,strlen(output));
-if(status != strlen(output)) {
-fprintf(stderr,"Se enviaron solo %i de %lu bytes\n",status,strlen(output));
+status=write(client,cadena,strlen(cadena));
+if(status != strlen(cadena)) {
+fprintf(stderr,"Se enviaron solo %i de %lu bytes\n",status,strlen(cadena));
 return 1;
 }
 }
